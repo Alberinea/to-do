@@ -1,12 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import fetchAPi from '../data/fetchApi'
 import Todos from '../components/Todos';
-import users from '../data/users';
-import todos from '../data/todos';
 
 const Main = () => {
   const [newTodo, setNewTodo] = useState('');
-  const [todosList, setTodosList] = useState(todos);
+  const [users, setUsers] = useState([]);
+  const [todosList, setTodosList] = useState([]);
   const [triggerArray, setTriggerArray] = useState([]);
+
+  useEffect(() => {
+    const usersURL = 'https://jsonplaceholder.typicode.com/users';
+    const todosURL = 'https://jsonplaceholder.typicode.com/todos';
+
+    fetchAPi(usersURL).then((data) => {
+      setUsers(data);
+    });
+    
+    fetchAPi(todosURL).then((data) => {
+      setTodosList(data);
+    });
+  })
 
   const addNewTodo = (userId) => {
     if (newTodo === '') return;
@@ -14,7 +27,7 @@ const Main = () => {
     const todosCopy = [...todosList];
     todosCopy.push({
       userId: userId,
-      id: todos.length + 1,
+      id: todosList.length + 1,
       title: newTodo,
       completed: false,
     });
