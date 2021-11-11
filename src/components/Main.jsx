@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import fetchAPi from '../data/fetchApi'
+import fetchAPi from '../Utils/fetchApi'
 import Todos from '../components/Todos';
 
 const Main = () => {
