@@ -6,6 +6,7 @@ import todos from '../data/todos';
 const Main = () => {
   const [newTodo, setNewTodo] = useState('');
   const [todosList, setTodosList] = useState(todos);
+  const [triggerArray, setTriggerArray] = useState([]);
 
   const addNewTodo = (userId) => {
     if (newTodo === '') return;
@@ -37,6 +38,16 @@ const Main = () => {
     setTodosList(todosCopy);
   };
 
+  const mutateTriggerArray = (userId) => {
+    const triggerArrayCopy = [...triggerArray];
+    if (triggerArrayCopy.includes(userId)) {
+      triggerArrayCopy.splice(triggerArrayCopy.indexOf(userId), 1);
+    } else {
+      triggerArrayCopy.push(userId);
+    }
+    setTriggerArray(triggerArrayCopy);
+  };
+
   return (
     <main className="w-100 py-5">
       <section className="container">
@@ -44,10 +55,12 @@ const Main = () => {
           users={users}
           todosList={todosList}
           newTodo={newTodo}
+          triggerArray={triggerArray}
           setNewTodo={setNewTodo}
           addNewTodo={addNewTodo}
           toggleTodo={toggleTodo}
           deleteTodo={deleteTodo}
+          mutateTriggerArray={mutateTriggerArray}
         />
       </section>
     </main>

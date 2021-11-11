@@ -104,3 +104,11 @@ svg {
 svg:hover {
   fill: red;
 }
+
+.name {
+  cursor: pointer;
+}
+
+.name:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}

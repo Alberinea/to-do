@@ -2,26 +2,57 @@ const Todos = ({
   users,
   todosList,
   newTodo,
+  triggerArray,
   setNewTodo,
   addNewTodo,
   toggleTodo,
   deleteTodo,
+  mutateTriggerArray,
 }) => {
   return users.map((user) => {
     return (
       <div className="py-4" key={user.id}>
-        <h1 className="pb-2 text-danger">
+        <h1
+          onClick={() => mutateTriggerArray(user.id)}
+          className="mb-2 text-danger name"
+        >
           {user.username}{' '}
           <span className="fs-6 text-black opacity-50 fst-italic">
             {user.email}
           </span>
-          <div className="bg-light my-1 p-2 fs-6 text-black">
-            <p>Phone: {user.phone}</p>
-            <p>Website: {user.website}</p>
-            <p>Company: {user.company.name}</p>
-          </div>
         </h1>
-        <div className="input-group pb-3">
+        <div
+          style={{
+            display: !triggerArray.includes(user.id) ? 'none' : 'block',
+          }}
+          className="bg-light my-1 p-2 fs-6 text-black"
+        >
+          <p>
+            <span className="fw-bold">Name: </span>
+            {user.name}
+          </p>
+          <p>
+            <span className="fw-bold">Phone:</span> {user.phone}
+          </p>
+          <p>
+            <span className="fw-bold">Website:</span> {user.website}
+          </p>
+          <p>
+            <span className="fw-bold">Company:</span> {user.company.name}
+          </p>
+          <p>
+            <span className="fw-bold">Address:</span> {user.address.street}{' '}
+            Street, {user.address.suite}, {user.address.city},{' '}
+            {user.address.zipcode}, {user.address.geo.lat},{' '}
+            {user.address.geo.lng}
+          </p>
+        </div>
+        <div
+          style={{
+            display: !triggerArray.includes(user.id) ? 'none' : 'flex',
+          }}
+          className="input-group pb-3"
+        >
           <input
             type="text"
             placeholder="Add new todo"
@@ -36,7 +67,12 @@ const Todos = ({
             Add
           </button>
         </div>
-        <h4 className="mb-3">
+        <h4
+          style={{
+            display: !triggerArray.includes(user.id) ? 'none' : 'block',
+          }}
+          className="mb-3"
+        >
           <mark>
             {
               todosList.filter(
@@ -50,6 +86,9 @@ const Todos = ({
           if (todo.userId === user.id) {
             return (
               <div
+                style={{
+                  display: !triggerArray.includes(user.id) ? 'none' : 'block',
+                }}
                 className="form-check border-bottom py-2 ms-0 ms-sm-3"
                 key={todo.id}
               >
