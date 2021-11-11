@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import fetchAPi from '../Utils/fetchApi'
+import fetchAPi from '../Utils/fetchApi';
 import Todos from '../components/Todos';
 
 const Main = () => {
@@ -15,11 +15,11 @@ const Main = () => {
     fetchAPi(usersURL).then((data) => {
       setUsers(data);
     });
-    
+
     fetchAPi(todosURL).then((data) => {
       setTodosList(data);
     });
-  })
+  }, []);
 
   const addNewTodo = (userId) => {
     if (newTodo === '') return;
