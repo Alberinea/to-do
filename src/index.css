@@ -96,3 +96,11 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+svg {
+  cursor: pointer;
+}
+
+svg:hover {
+  fill: red;
+}
